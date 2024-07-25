@@ -1,6 +1,6 @@
 # Smart Feedback
 
-Aplikasi Smart Feedback adalah aplikasi yang digunakan untuk memberikan feedback secara otomatis kepada pengguna yang telah melakukan penilaian terhadap publish agency yang ada di Indonesia. Aplikasi ini dibuat menggunakan framework Laravel 11 dan menggunakan python untuk mengimplementasikan metode yang digunakan yaitu metode BERT.
+Aplikasi Smart Feedback adalah aplikasi yang digunakan untuk memberikan feedback secara otomatis kepada pengguna yang telah melakukan penilaian terhadap publish agency yang ada di Indonesia. Aplikasi ini dibuat menggunakan framework Laravel 11 dan menggunakan python untuk mengimplementasikan metode yang digunakan yaitu metode BERT. Tujuan Aplikasi ini dibuat adalah sebagai tugas akhir mata kuliah Sistem Cerdas Teknik Informatika, dan untuk pembelajaran implementasi metode BERT kedalam sebuah aplikasi.
 
 ## Requirements
 
@@ -28,5 +28,3 @@ Aplikasi Smart Feedback adalah aplikasi yang digunakan untuk memberikan feedback
 - Set your database credentials in your `.env` file
 - Run `php artisan migrate --seed` to create and seed your database
 - Run `php artisan serve` to start the app
-
-## License
