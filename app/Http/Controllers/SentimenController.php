@@ -23,8 +23,8 @@ class SentimenController extends Controller
         $reviews = json_decode($reviews, true);
 
         $results = [];
-        foreach ($reviews as $review) {
-            $response = Http::post('http://localhost:5000/predict', [
+        foreach ($reviews[0]['reviews'] as $review) {
+            $response = Http::post('http://localhost:3000/predict', [
                 'text' => $review['text'],
                 'rating' => $review['rating']
             ]);
