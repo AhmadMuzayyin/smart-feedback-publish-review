@@ -8,9 +8,9 @@ const app = express();
 const port = 3000;
 
 const pusher = new Pusher({
-    appId: '1597551',
-    key: '2b611c879d009c74d202',
-    secret: '4523e18e23c9c57f06be',
+    appId: '',
+    key: '',
+    secret: '',
     cluster: 'ap1',
     useTLS: true
 });
@@ -94,7 +94,6 @@ function analyzeSentiment(text, rating) {
 
     return { label, score };
 }
-
 function classifyText(text) {
     if (!text) {
         return { category: "UNKNOWN", score: 0.0 };
@@ -111,49 +110,6 @@ function classifyText(text) {
 
     return { category: "UNKNOWN", score: 0.0 };
 }
-async function extractReviews(page) {
-    const reviews = await page.$$('div[data-review-id^="Ch"]');
-    const reviewData = [];
-
-    for (const review of reviews) {
-        try {
-            const authorNameElem = await review.$('div.d4r55');
-            const authorName = authorNameElem ? await authorNameElem.innerText() : "Unknown";
-
-            const authorUrlElem = await review.$('a.WNxzHc');
-            const authorUrl = authorUrlElem ? await authorUrlElem.getAttribute('href') : null;
-
-            const ratingElems = await review.$$('span.kvMYJc span[aria-label$="stars"]');
-            const rating = ratingElems.length;
-
-            const textElem = await review.$('span.wiI7pd');
-            const text = textElem ? await textElem.innerText() : "";
-
-            const timeElem = await review.$('span.rsqaWe');
-            const timeElement = timeElem ? await timeElem.innerText() : null;
-
-            const profilePhoto = await review.$('img.NBa7we');
-            const profilePhotoUrl = profilePhoto ? await profilePhoto.getAttribute('src') : null;
-
-            const langSpan = await review.$('span.tntU7c');
-            const language = langSpan ? await langSpan.getAttribute('lang') : null;
-
-            reviewData.push({
-                author_name: authorName,
-                author_url: authorUrl,
-                language: language,
-                profile_photo_url: profilePhotoUrl,
-                rating: rating,
-                relative_time_description: timeElement,
-                text: text
-            });
-        } catch (e) {
-            console.error(`Error extracting review: ${e}`);
-        }
-    }
-
-    return reviewData;
-}
 app.get('/', (req, res) => {
     res.json('Hello World!');
 });
@@ -168,7 +124,7 @@ app.post('/classify', (req, res) => {
     res.json(classificationResult);
 });
 app.get('/reviews', async (req, res) => {
-    await mongoose.connect('mongodb://localhost:32769/smart_feedback');
+    await mongoose.connect('');
     const result = await mongoose.connection.db.collection('reviews').findOne({});
     if (!result) {
         res.json({ error: 'No reviews found' });
@@ -178,7 +134,7 @@ app.get('/reviews', async (req, res) => {
 })
 app.get('/getreview', async (req, res) => {
     try {
-        let uri = "https://data.accentapi.com/feed/25442808.json?no_cache=20240728222017"
+        let uri = ""
         axios.get(uri)
             .then(async (response) => {
                 const allReviews = response.data.reviews;
