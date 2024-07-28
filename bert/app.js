@@ -138,7 +138,7 @@ app.get('/getreview', async (req, res) => {
         axios.get(uri)
             .then(async (response) => {
                 const allReviews = response.data.reviews;
-                await mongoose.connect('mongodb://localhost:32769/smart_feedback');
+                await mongoose.connect('');
                 const result = await mongoose.connection.db.collection('reviews').findOne({});
                 if (!result) {
                     await mongoose.connection.db.collection('reviews').insertOne(allReviews);
