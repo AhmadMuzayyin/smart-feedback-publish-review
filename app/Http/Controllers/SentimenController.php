@@ -14,27 +14,7 @@ class SentimenController extends Controller
 {
     public function index()
     {
-        $sentiments = $this->analyze();
+        $sentiments = Http::post('http://localhost:3000/predict')->json();
         return view('sentimen.index', compact('sentiments'));
-    }
-    public function analyze()
-    {
-        $reviews = file_get_contents(storage_path('reviews.json'));
-        $reviews = json_decode($reviews, true);
-
-        $results = [];
-        foreach ($reviews[0]['reviews'] as $review) {
-            $response = Http::post('http://localhost:3000/predict', [
-                'text' => $review['text'],
-                'rating' => $review['rating']
-            ]);
-
-            $sentiment = $response->json();
-            $results[] = [
-                'review' => $review,
-                'sentiment' => $sentiment
-            ];
-        }
-        return $results;
     }
 }

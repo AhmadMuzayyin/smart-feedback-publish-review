@@ -46,17 +46,18 @@
                             </thead>
                             <tbody>
                                 @foreach ($reviews as $review)
+                                    {{-- @dd($review) --}}
                                     <tr>
                                         <td>
-                                            <img src="{{ $review['profile_photo_url'] }}" alt=""
+                                            <img src="{{ $review['reviewer_photo_link'] }}" alt=""
                                                 class="img-fluid rounded-circle">
                                         </td>
-                                        <td>{{ $review['author_name'] }}</td>
+                                        <td>{{ $review['reviewer_name'] }}</td>
                                         <td>{{ $review['rating'] ?? 0 }}</td>
                                         <td>
-                                            <textarea name="" id="" rows="3" class="form-control" readonly>{{ $review['text'] }}</textarea>
+                                            <textarea name="" id="" rows="3" class="form-control" readonly>{{ $review['review_text'] }}</textarea>
                                         </td>
-                                        <td>{{ $review['relative_time_description'] }}</td>
+                                        <td>{{ date('d F Y', strtotime($review['review_date_time'])) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

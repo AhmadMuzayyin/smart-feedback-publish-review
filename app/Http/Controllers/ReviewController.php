@@ -9,9 +9,7 @@ class ReviewController extends Controller
 {
     public function index()
     {
-        $reviews = file_get_contents(storage_path('reviews.json'));
-        $reviews = json_decode($reviews, true);
-        // dd($this->classify());
+        $reviews = Http::get('http://localhost:3000/reviews')->json();
         return view('reviews.index', compact('reviews'));
     }
     public function classify()

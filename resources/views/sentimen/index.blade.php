@@ -47,10 +47,10 @@
                                 @foreach ($sentiments as $sentimen)
                                     <tr>
                                         <td>
-                                            <img src="{{ $sentimen['review']['profile_photo_url'] }}" alt=""
+                                            <img src="{{ $sentimen['reviewer_photo_link'] }}" alt=""
                                                 class="img-fluid rounded-circle">
                                         </td>
-                                        <td>{{ $sentimen['review']['author_name'] }}</td>
+                                        <td>{{ $sentimen['reviewer_name'] }}</td>
                                         <td>
                                             @if ($sentimen['sentiment']['label'] == 'POSITIVE')
                                                 <span
