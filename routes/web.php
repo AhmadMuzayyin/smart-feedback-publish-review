@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return to_route('login');
 });
 
 Auth::routes();
@@ -31,29 +31,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::controller(ReviewController::class)->as('review.')->group(function () {
         Route::get('/reviews', 'index')->name('index');
-        Route::get('/reviews/create', 'create')->name('create');
-        Route::post('/reviews', 'store')->name('store');
-        Route::get('/reviews/{review}', 'show')->name('show');
-        Route::get('/reviews/{review}/edit', 'edit')->name('edit');
-        Route::put('/reviews/{review}', 'update')->name('update');
-        Route::delete('/reviews/{review}', 'destroy')->name('destroy');
     });
     Route::controller(SentimenController::class)->as('sentimen.')->group(function () {
         Route::get('/sentimen', 'index')->name('index');
-        Route::get('/sentimen/create', 'create')->name('create');
-        Route::post('/sentimen', 'store')->name('store');
-        Route::get('/sentimen/{sentimen}', 'show')->name('show');
-        Route::get('/sentimen/{sentimen}/edit', 'edit')->name('edit');
-        Route::put('/sentimen/{sentimen}', 'update')->name('update');
-        Route::delete('/sentimen/{sentimen}', 'destroy')->name('destroy');
     });
     Route::controller(AutoResponsController::class)->as('autorespons.')->group(function () {
         Route::get('/autorespons', 'index')->name('index');
-        Route::get('/autorespons/create', 'create')->name('create');
-        Route::post('/autorespons', 'store')->name('store');
-        Route::get('/autorespons/{autorespons}', 'show')->name('show');
-        Route::get('/autorespons/{autorespons}/edit', 'edit')->name('edit');
-        Route::put('/autorespons/{autorespons}', 'update')->name('update');
-        Route::delete('/autorespons/{autorespons}', 'destroy')->name('destroy');
     });
 });
