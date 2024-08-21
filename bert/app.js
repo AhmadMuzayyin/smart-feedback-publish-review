@@ -130,7 +130,7 @@ async function getReviews(req, res) {
         console.log(error)
     }
 }
-setInterval(getReviews, 60000)
+setInterval(getReviews, 50000)
 const openaiApiKey = process.env.OPENAI_API_KEY;
 async function generateResponse(reviewText) {
     try {
@@ -190,7 +190,10 @@ app.post('/predict', async (req, res) => {
             if (element.rating >= 4 && label !== 'POSITIVE') {
                 label = 'POSITIVE';
                 score = Math.max(score, 0.7);
-            } else if (element.rating <= 2 && label !== 'NEGATIVE') {
+            } else if (element.rating == 2 && label !== 'NEGATIVE') {
+                label = 'NEUTRAL';
+                score = Math.min(score, 0.3);
+            } else if (element.rating < 2 && label !== 'NEGATIVE') {
                 label = 'NEGATIVE';
                 score = Math.min(score, 0.3);
             }
@@ -277,7 +280,10 @@ app.get('/autorespons', async (req, res) => {
                 if (element.rating >= 4 && label !== 'POSITIVE') {
                     label = 'POSITIVE';
                     score = Math.max(score, 0.7);
-                } else if (element.rating <= 2 && label !== 'NEGATIVE') {
+                } else if (element.rating == 2 && label !== 'NEGATIVE') {
+                    label = 'NEUTRAL';
+                    score = Math.min(score, 0.3);
+                } else if (element.rating < 2 && label !== 'NEGATIVE') {
                     label = 'NEGATIVE';
                     score = Math.min(score, 0.3);
                 }
